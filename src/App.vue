@@ -1,33 +1,22 @@
 <template>
   <div>
     <app-counter></app-counter>
-    <app-car :carName="carName" 
-             :carYear="carYear" 
-             :changeFunc="changeNameToAudi" 
-             @nameChanged="carName = $event" 
-             >
-    </app-car>
+    <app-car></app-car>
+    <app-onoff v-model="switched"></app-onoff>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  
-    data () {
+  data() {
     return {
-      carName: 'Ford',
-      carYear: '2018',
-    }
-  },
-  methods: {
-    changeNameToAudi() {
-      this.carName = 'Audi'
+      switched: false,
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="sass">
 
 </style>
