@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="pt-3">
+    <form class="pt-3" @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" class="form-control" v-model="email" @blur="$v.email.$touch()"
@@ -10,6 +10,9 @@
         </div>
         <div class="invalid-feedback" v-if="!$v.email.email">
           This should be an email
+        </div>
+        <div class="invalid-feedback" v-if="!$v.email.uniqEmail">
+          This email is already exists
         </div>
       </div>
 
@@ -34,6 +37,8 @@
         </div>
       </div>
 
+      <button class="btn btn-success" type="submit" :disabled="$v.$invalid">Submit</button>
+
     </form>
   </div>
 </template>
@@ -49,10 +54,19 @@ export default {
       confirmPassword: ''
     }
   },
+  methods: {
+    onSubmit() {
+      console.log(this.email);
+      console.log(this.password);
+    }
+  },
   validations: {
     email: {
       required: required,
-      email: email
+      email: email,
+      uniqEmail: function(newEmail) {
+        return newEmail !== 'text@mail.ru'
+      }
     },
     password: {
       minLength: minLength(6),
