@@ -1,5 +1,18 @@
 <template>
   <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <div class="navbar-nav">
+            <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
+            <router-link class="nav-link" to="/cars" active-class="active" exact>Cars</router-link>
+            <router-link class="nav-link" to="/car/1" active-class="active" exact>Car 1</router-link>
+            <router-link class="nav-link" to="/car/2" active-class="active" exact>Car 2</router-link>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <form class="pt-3" @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="email">Email</label>
@@ -40,6 +53,8 @@
       <button class="btn btn-success" type="submit" :disabled="$v.$invalid">Submit</button>
 
     </form>
+
+    <router-view></router-view>
   </div>
 </template>
 
@@ -80,8 +95,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  form 
+    margin-bottom: 20px
   .invalid-feedback
     display: block
   .form-group
     margin-bottom: 20px
+  .active
+    color: pink!important 
 </style>
